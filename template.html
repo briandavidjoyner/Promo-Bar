@@ -1,0 +1,361 @@
+<script type="text/javascript">// <![CDATA[
+   $(document).ready(function() {
+   
+   				$(window).scroll(function(e){
+   					var scrollTop = $(window).scrollTop();
+   					var docHeight = $(document).height();
+   					var winHeight = $(window).height();
+   					var scrollPercent = (scrollTop) / (docHeight - winHeight);
+   					var scrollPercentRounded = Math.round(scrollPercent*100);
+   					show_no(scrollPercentRounded);
+   				});
+   			
+   				function show_no(scrollPercentRounded){
+   				if ( scrollPercentRounded > 20 ){
+   					jQuery('#mobile_fixed_el').fadeIn();
+   				} else {
+   					jQuery('#mobile_fixed_el').fadeOut();
+   				}
+   				}
+   			
+   });
+   // ]]>
+</script>
+<style type="text/css">
+   <!--
+   	  body{
+   	  	background-color: white;
+   	  }
+      #content{
+        margin-top:0px!important;
+      }
+      body.meta-fixed {
+      	padding-top:0px!important;
+      }
+      a{
+      	text-decoration: none!important;
+      }
+      #lp_nav_bar{
+      	height: 70px; 
+      	width: 100%; 
+      	background-color: white; 
+      	z-index: 5000; 
+      	display: table; 
+      	position:fixed; 
+      	top: 0px;
+      }
+      #promo_code_bar{
+      	height: 70px; 
+      	width: 100%; 
+      	background-color: #6dc01d; 
+      	z-index: 5000; 
+      	display: table; 
+      	position:fixed; 
+      	top: 70px;
+      }
+      #text_bar{
+      	padding: 5px 5px 5px 5px; 
+      	color: white; 
+      	display: table-cell; 
+      	vertical-align: middle; 
+      	text-align: center; 
+      	font-size: 2em;
+      }
+      #lp_content{
+      	font-family: 'Montserrat', sans-serif!important;
+      	line-height: 1!important;
+      	color:black!important;
+      	background:white;
+      }
+      #lp_image1{
+      	margin-top: 140px;
+      	background-image: url(https://cdn.shopify.com/s/files/1/0171/2242/files/header_3_small.jpg)!important;
+      	min-height:500px!important;
+      	background-size:cover!important;
+      	background-repeat: no-repeat;
+      	background-position:center;
+      }
+      .lp_text_center{
+      	position: absolute!important;
+      	height:500px!important;
+      	width:100%!important;
+      }
+      .lp_headline_text{
+      	transform: translate(-50%, -50%)!important;
+        	position: absolute!important;
+        	top: 50%!important;
+        	left: 50%!important;
+        	font-size: 9em!important;
+        	text-align: center!important;
+        	color:white!important;
+        	font-weight:700!important;
+      }
+      #lp_value_prop{
+      	padding: 30px 0px 30px 0px!important;
+      	text-align: center!important;
+      	font-size: 3em!important;
+      }
+      #passport_logo{
+      	padding-top: 30px;
+      	max-width: 80%;
+      }
+      .lp_icons{
+        display:inline-block!important;
+        margin: 45px 45px 45px 45px;
+      }
+      .lp_button{
+          margin-left: auto!important;
+          margin-right: auto!important;
+          font-size: 35px!important;
+          margin-top: 20px!important;
+          padding: 25px 0px 25px 0px!important;
+          background-color:rgb(109, 192, 29)!important;
+          max-width: 730px!important;
+          color:white!important;
+      }
+      .lp_inline{
+      	display: inline-block!important;
+      	width: 49%!important;
+      	min-height: 550px!important;
+      	vertical-align: top!important;
+      	text-align: center!important;
+      }
+      .lp_1_column{
+      	background-image:url(https://cdn.shopify.com/s/files/1/0171/2242/products/dcuisine-beef-short-ribs-1_2048x2048.jpg)!important;
+      	background-size:cover!important;
+      	background-position:center;
+      }
+      .lp_2_column{
+      }
+      .lp_3_column{
+      	background-image:url(https://cdn.shopify.com/s/files/1/0171/2242/files/gift.jpg)!important;
+      	background-size:cover!important;
+      	background-position:center;
+      	background-repeat: repeat-x;
+      }
+      .lp_4_column{
+      }
+      .lp_5_column{
+      	background-image:url(https://cdn.shopify.com/s/files/1/0171/2242/files/header_left_2.jpg)!important;
+      	background-size:cover!important;
+      	background-position:center;
+      }
+      .lp_text_columm{
+      	padding: 65px 130px 30px 130px!important;
+      }
+      .lp_large_font{
+      	font-size: 4em!important;
+      	font-weight: 700!important;
+      }
+      .lp_align_bottom{
+      	font-size:2em!important;
+      	font-weight: 400!important;
+      }
+      .vp_circle{
+      	z-index: 1000!important;
+      	display: table!important;
+          position: relative!important;
+          text-align: center!important;
+          top: -315px!important;
+          left:-1%!important;
+          margin-right:auto!important;
+          margin-left: auto!important;
+          border-radius: 150px!important;
+          background-color: rgb(109, 192, 29)!important;
+          width: 150px!important;
+          height: 150px!important;
+          font-size: 1.25em!important;
+          color: black!important;
+      }
+      .slide_up{
+      	margin-top: -98px!important;
+      }
+      .table_cell{
+      	display: table-cell!important;
+      	vertical-align: middle!important;
+      }
+      .section_up{
+      	position:relative!important;
+      	top: -280px!important;
+      }
+      .desktop_none{
+      	display:none!important;
+      }
+      .circle_text_bold{
+      	font-weight: 700!important;
+      }
+      #mobile_text{
+      	display:none;
+      }
+      #mobile_fixed_el{
+      	display: none;
+      }
+      #featured_in{
+      	text-align: center;
+    	margin-left: auto!important;
+    	margin-right: auto!important;
+      }
+      @media only screen and (max-width: 1150px) {
+      	#mobile_fixed_el{
+      		position: fixed;
+      		bottom:0;
+      		height:125px;
+      		width:100%;
+      		background-color:rgb(109, 192, 29)!important;
+      		color:white;
+      		text-align: center;
+      	}
+      	#mobile_el_down{
+      		position: relative;
+          	top: 40px;
+      	}
+      	#mobile_text{
+      		position: absolute;
+      		display: initial!important;
+      		height: 200px;
+          	width: 100%;
+      		padding: 30px 0px 30px 0px!important;
+      		text-align: center!important;
+      		font-size: 3em!important;
+      		font-weight: 700;
+      		color:white;
+      	}
+      	#text_bar{
+      		font-size: 1.5em;
+      	}
+      	.lp_headline_text{
+      		font-size: 3em!important;
+      		display:none;
+      	}
+      	#lp_image1{
+      		min-height: 200px!important;
+      		background-position: bottom center!important;
+      		width:100%!important;
+      	}
+      	.lp_text_center{
+      		height:200px!important;
+      	}
+      	#lp_value_prop{
+      		font-size:2em!important;
+      		padding:15px 10px 15px 2px!important;
+      	}
+      	.lp_button{
+      		font-size: 25px!important;
+      	}
+      	.lp_1_column,.lp_2_column,.lp_3_column,.lp_4_column,.lp_5_column{
+      		min-height:300px;
+      	}
+      	.lp_2_column{
+      		display: table-cell!important;
+          	padding: 0px 0px 30px 0px;
+      	}
+      	.lp_3_column{
+      		background-size:35%!important;
+      	}
+      	.image_height_small{
+      		min-height: 200px!important;
+      	}
+      	.lp_text_columm{
+      		padding: 30px 20px 0px 20px!important;
+      	}
+      	.lp_align_bottom{
+      		font-size: 1.75em!important;
+      	}
+      	.lp_large_font{
+      		font-size: 2em!important;
+      	}
+      	.slide_up{
+      		margin-top: 0px!important;
+      	}
+      	.vp_circle{
+      		display:none!important;
+      	}
+      	.lp_inline{
+      		width:100%!important;
+      	}
+      	.desktop_none{
+      		display: inline-block!important;
+      	}
+      	.mobile_none{
+      		display: none!important;
+      	}
+      	#featured_in{
+      		display: none!important;
+      	}
+      }
+      -->
+</style>
+<a href="#wisepops">
+   <div id="mobile_fixed_el">
+      <div id="mobile_el_down"><span style="font-weight: bold; font-size: 2em;">Click</span> To <span style="font-weight: bold; font-size: 2em;">Save $25<br /></span>On Your Order</div>
+   </div>
+</a>
+<div id="lp_content">
+	<div id="lp_nav_bar">
+		<a href="/" target="_blank" alt="dcuisine Gourmet Foods"><img style="height:80px;display:block; margin-left:auto; margin-right:auto" src="https://cdn.shopify.com/s/files/1/0171/2242/files/logo_comfortFoods.png?14953435202895153336">
+	</div></a>
+   <a href="#wisepops"><div id="promo_code_bar">
+      <div id="text_bar">Get Started! Click To <strong>Save $25</strong> On Orders $75+</div>
+   </div></a>
+   <div id="mobile_text">
+      <div class="lp_text_center">Convenient.<br />Nutritious.<br />Delicious.</div>
+   </div>
+   <div id="lp_image1">
+      <div class="lp_text_center">
+         <div class="lp_headline_text">Convenient.<br />Nutritious.<br />Delicious.</div>
+      </div>
+   </div>
+   <div id="lp_value_prop">
+      <div style="padding: 0px 80px 0px 80px;">100% all natural flash frozen meals and organic smoothies by dcuisine</div>
+      <a href="#wisepops">
+         <div class="lp_button"><span style="font-weight: bold;">Click</span> To <span style="font-weight: bold;">Save $25</span> On Your Order</div>
+      </a>
+      <!-- Logo Place Holder -->
+   </div>
+   <div>
+      <div class="lp_1_column lp_inline image_height_small"></div>
+      <div class="lp_2_column lp_inline">
+         <div class="lp_text_columm lp_large_font">Ready To Eat Meals</div>
+         <div class="lp_text_columm lp_align_bottom">Farm to table small batch meals ready to eat in a matter of minutes. Just order, heat, and eat.</div>
+      </div>
+      <a href="#wisepops">
+         <div class="vp_circle section_1_circle">
+            <div class="table_cell">Get Started<br />Click To<br /><span class="circle_text_bold">Save $25</span></div>
+         </div>
+      </a>
+   </div>
+   <div class="slide_up">
+      <div class="lp_5_column lp_inline desktop_none image_height_small"></div>
+      <div class="lp_2_column lp_inline">
+         <div class="lp_text_columm lp_large_font">Organic Smoothies</div>
+         <div class="lp_text_columm lp_align_bottom">Organic Greek yogurt + orchard fresh organic fruit make our smoothies a healthy choice for breakfast or a snack any time of the day!</div>
+      </div>
+      <div class="lp_5_column lp_inline mobile_none"></div>
+      <a href="#wisepops">
+         <div class="vp_circle section_1_circle">
+            <div class="table_cell">Get Started<br />Click To<br /><span class="circle_text_bold">Save $25</span></div>
+         </div>
+      </a>
+   </div>
+   <div class="slide_up">
+      <div class="lp_3_column lp_inline image_height_small"></div>
+      <div class="lp_2_column lp_inline">
+         <div class="lp_text_columm lp_large_font">Gifts</div>
+         <div class="lp_text_columm lp_align_bottom">Don't know what to send? Let your friends and family choose by giving them a dcuisine gift card.</div>
+      </div>
+      <a href="#wisepops">
+         <div class="vp_circle section_1_circle">
+            <div class="table_cell">Get Started<br />Click To<br /><span class="circle_text_bold">Save $25</span></div>
+         </div>
+      </a>
+   </div>
+   <div id="featured_in">
+   	<div id="lp_value_prop" class="slide_up">
+      <div>Our Friends Think We're Pretty Cool...  Frozen You Might Say</div>
+   	</div>
+   	<div class="lp_icons"><img src="https://cdn.shopify.com/s/files/1/0171/2242/t/10/assets/press-today-show-color.jpg?929881514116778256" /></div>
+      <div class="lp_icons"><img src="https://cdn.shopify.com/s/files/1/0171/2242/t/10/assets/press-100dept-color.jpg?929881514116778256" /></div>
+      <div class="lp_icons"><img src="https://cdn.shopify.com/s/files/1/0171/2242/t/10/assets/purewow-logo-color.jpg?929881514116778256" /></div>
+      <div class="lp_icons"><img src="https://cdn.shopify.com/s/files/1/0171/2242/t/10/assets/ups_logo-color.jpg?929881514116778256" /></div>
+   </div>
+</div>
