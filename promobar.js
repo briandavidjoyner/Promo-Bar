@@ -25,8 +25,8 @@ var profiler = {
 	},
 
 	//Cookie Functions
-	readCookie : function(cookieN){
-		var name = cookieN + "=";
+	readCookie : function(cname){
+		var name = cname + "=";
     	var ca = document.cookie.split(';');
     	for(var i = 0; i <ca.length; i++) {
         var c = ca[i];
@@ -49,6 +49,7 @@ var profiler = {
 	},
 
 	urlTcookie : function(){
+		
 		var cookie = this.readCookie(this.settings.cookieN);
 		if (cookie === true){
 			//console.log('cookie is already set');
@@ -78,7 +79,7 @@ var profiler = {
 				return false;
 			};
 		};
-		//console.log('good URL');
+		console.log('good URL');
 		return true;
 
 	},
@@ -92,6 +93,8 @@ var profiler = {
 	},
 
 	eligible : function(){
+
+		this.urlTcookie();
 
 		var urlCheck = this.urlCheck();
 		var cookie = this.cookieCheck();
@@ -130,29 +133,23 @@ var profiler = {
 	},
 
 	//Coupon Auto Apply
-	addCoupon : function(couponCode){
+	addCoupon : function($coupon_code_parem){
     	jQuery('#cart-form').prepend('<div id="coupon_code" style="text-align:center;margin-top:10px;"><h1>Discount Code</h1><input type="text" name="discount" style="color:#6dc01d!important;text-align:center;border-color:gray;"/><p>Discount codes will be applied at check out.</p></div>');
-    	jQuery('#coupon_code input').val(couponCode);
+    	jQuery('#coupon_code input').val($coupon_code_parem);
   	},
 
-  	couponEligible : function(discount){
+  	couponEligible : function(){
   		var url = this.urlPath();
   		var coupon;
 
 
   		if(url.indexOf('/cart') > -1){
-  			coupon = this.readCookie(discount);
-  			if (coupon){
-  				this.addCoupon(coupon);
-  			}
+  			coupon = this.readCookie('discount');
+  			this.addCoupon(coupon);
   		}
   	},
 
-  	//Init
-	init : function(){
-		this.urlTcookie();
-		this.eligible();
-		this.couponEligible('discount');
-	}
 };
-profiler.init();
+
+profiler.eligible();
+profiler.couponEligible();
