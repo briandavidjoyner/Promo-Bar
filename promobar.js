@@ -7,7 +7,7 @@ var profiler = {
 		cookieM : '?25off',
 		div_element : '<div id="promo_code_bar"><div id="text_bar">Save $25 Off Your First Order Of $75+ <strong>Use Code : NEW</strong> at Checkout</div></div>',
     	urls_to_exclude : ['/checkout/thank_you','/pages/passport'],
-    	css : '#promo_code_bar{line-height:200%;position:fixed;height:104px!important;width:100%;background-color:#6dc01d;z-index:-1000000000;display:table;}#text_bar{color:white;display:table-cell;vertical-align:middle;text-align:center;font-size:2em;}@media only screen and (max-width: 900px) {#promo_code_bar{line-height:200%;position:fixed;height:0px;width:100%;background-color:#6dc01d;z-index:-1000000;display:table;}#promo_code_bar{bottom:0!important;font-size:80%;padding:5px 5px 5px 5px;height:130px!important;}#text_bar{line-height:125%;}#sidebar, #content{margin-top:0px!important;}#footer{padding-bottom:200px!important;}}@media only screen and (min-width: 901px) {#sidebar, #content{margin-top:104px!important;padding-bottom:104px!important;}}',
+    	css : '#promo_code_bar{line-height:200%;position:fixed;height:105px!important;width:100%;background-color:#6dc01d;z-index:-1000000000;display:table;}#text_bar{color:white;display:table-cell;vertical-align:middle;text-align:center;font-size:2em;}@media only screen and (max-width: 900px) {#promo_code_bar{line-height:200%;position:fixed;height:0px;width:100%;background-color:#6dc01d;z-index:-1000000;display:table;}#promo_code_bar{bottom:0!important;font-size:80%;padding:5px 5px 5px 5px;height:130px!important;}#text_bar{line-height:125%;}#sidebar, #content{margin-top:0px!important;}#footer{padding-bottom:200px!important;}}@media only screen and (min-width: 901px) {#sidebar, #content{margin-top:104px!important;padding-bottom:104px!important;}}',
 		head : document.head || document.getElementsByTagName('head')[0],
     	style : document.createElement('style')
 
@@ -129,7 +129,7 @@ var profiler = {
         	jQuery('#sidebar').animate({marginTop:'50px'});
         	jQuery('#content').animate({marginTop:'50px'});
     		});
-    	jQuery('#promo_code_bar').css('z-index',100000);
+    	jQuery('#promo_code_bar').css('z-index',5000);
 	},
 
 	//Coupon Auto Apply
