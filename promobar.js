@@ -5,8 +5,12 @@ var profiler = {
 		cookieV : true,
 		cookieE : 1,
 		cookieM : '?25off',
-		div_element : '<div id="promo_code_bar"><div id="text_bar">Save $25 Off Your First Order Of $75+ <strong>Use Code : NEW</strong> at Checkout</div></div>',
-    	urls_to_exclude : ['/checkout/thank_you','/pages/passport'],
+		div_copy : {
+			'twentyFiveOff' : 'Save $25 Off Your First Order Of $75+ <strong>Use Code : NEW</strong> at Checkout',
+			'default' : 'Save 20% On All Orders Through Thanksgiving! <strong>Use Code : 20OFF</strong'
+		},
+		default_code : '20OFF',
+    	urls_to_exclude : ['/checkout/thank_you','/pages/passport','/pages/huledet'],
     	css : '#promo_code_bar{line-height:200%;position:fixed;height:104px!important;width:100%;background-color:#6dc01d;z-index:-1000000000;display:table;}#text_bar{color:white;display:table-cell;vertical-align:middle;text-align:center;font-size:2em;}@media only screen and (max-width: 900px) {#promo_code_bar{line-height:200%;position:fixed;height:0px;width:100%;background-color:#6dc01d;z-index:-1000000;display:table;}#promo_code_bar{bottom:0!important;font-size:80%;padding:5px 5px 5px 5px;height:130px!important;}#text_bar{line-height:125%;}#sidebar, #content{margin-top:0px!important;}#footer{padding-bottom:200px!important;}}@media only screen and (min-width: 901px) {#sidebar, #content{margin-top:104px!important;padding-bottom:104px!important;}}',
 		head : document.head || document.getElementsByTagName('head')[0],
     	style : document.createElement('style')
@@ -33,7 +37,7 @@ var profiler = {
         while (c.charAt(0)==' ') {
             c = c.substring(1);
         }
-        if (c.indexOf(name) == 0) {
+        if (c.indexOf(name) === 0) {
             return c.substring(name.length,c.length);
         }
     	}
@@ -54,7 +58,7 @@ var profiler = {
 		if (cookie === true){
 			//console.log('cookie is already set');
 			return;
-		};
+		}
 
 		var url = this.urlSearch();
 			//console.log('index = ' + url.indexOf(this.settings.cookieM) );
@@ -62,7 +66,7 @@ var profiler = {
 				//console.log('url contains 25off');
 				this.setCookie(this.settings.cookieN, this.settings.cookieV, this.settings.cookieE);
 				this.setCookie('discount','NEW',this.settings.cookieE);
-			};
+			}
 	},
 
 	//Decision Enginge
@@ -77,8 +81,8 @@ var profiler = {
 			if ( url.indexOf(toSearch) > -1 ) {
 				//console.log('exluded URL');
 				return false;
-			};
-		};
+			}
+		}
 		console.log('good URL');
 		return true;
 
@@ -93,7 +97,7 @@ var profiler = {
 	},
 
 	eligible : function(){
-
+		console.log('activated');
 		this.urlTcookie();
 
 		var urlCheck = this.urlCheck();
@@ -101,10 +105,11 @@ var profiler = {
 		//console.log('url = ' + urlCheck + ' : cookie = ' + cookie);
 
 		if ( urlCheck && cookie ) {
-			//console.log('show bar');
-			this.showBar();
-		} else {
-			//console.log('no bar');
+			console.log('div copy = ' + profiler.settings.div_copy.twentyFiveOff);
+			this.showBar(profiler.settings.div_copy.twentyFiveOff);
+		} else if ( urlCheck ) {
+			console.log('div copy = ' + profiler.settings.div_copy.default);
+			this.showBar(profiler.settings.div_copy.default);
 		}
 	},
 
@@ -121,10 +126,18 @@ var profiler = {
 		_this.head.appendChild(_this.style);
 	},
 
-	showBar : function(){
-		this.css();
+	getDiv : function(copy){
+			var toSend ='<div id="promo_code_bar"><div id="text_bar">' + copy + '</div></div>';
+			console.log('1 =' + toSend);
+			return toSend;
+		},
 
-		jQuery('body').prepend(this.settings.div_element);
+	showBar : function(bar){
+		this.css();
+		var toShow = this.getDiv(bar);
+		console.log('2 =' + toShow);
+
+		jQuery('body').prepend(toShow);
     	jQuery('#promo_code_bar').animate({height: '+=75px'}, 100, function(){
         	jQuery('#sidebar').animate({marginTop:'50px'});
         	jQuery('#content').animate({marginTop:'50px'});
@@ -134,17 +147,15 @@ var profiler = {
 
 	//Coupon Auto Apply
 	addCoupon : function($coupon_code_parem){
-    	jQuery('#cart-form').prepend('<div id="coupon_code" style="text-align:center;margin-top:10px;"><h1>Discount Code</h1><input type="text" name="discount" style="color:#6dc01d!important;text-align:center;border-color:gray;"/><p>Discount codes will be applied at check out.</p></div>');
+    	jQuery('#cart-form').prepend('<div id="coupon_code" style="text-align:center;margin-top:10px;"><h1>Discount Code</h1><input type="text" name="discount" style="background-color:#6dc01d!important;color:white!important;width:225px;font-size:2em;;text-align:center;border-color:gray;"/><p>Discount codes will be applied at check out.</p></div>');
     	jQuery('#coupon_code input').val($coupon_code_parem);
   	},
 
   	couponEligible : function(){
   		var url = this.urlPath();
-  		var coupon;
+  		var coupon = this.readCookie('discount') || this.settings.default_code;
 
-
-  		if(url.indexOf('/cart') > -1){
-  			coupon = this.readCookie('discount');
+  		if (url.indexOf('/cart') > -1 && typeof coupon ==='string'){
   			this.addCoupon(coupon);
   		}
   	},
