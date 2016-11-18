@@ -9,36 +9,30 @@ var profiler = {
 				to: '',
 				lo: ''
 			},
-			50off : {
-				mark : '',
-				code : '50',
-				enable : false,
-				copy : ''
+			discount: {
+				fiftyOff : {
+					mark : '',
+					code : '50',
+					enable : false,
+					copy : ''
+				},
+				twentyFiveOff : {
+					mark : '?25off',
+					code : 'NEW',
+					enable : false,
+					copy : 'Save $25 Off Your First Order Of $75+ <strong>Use Code : NEW</strong> at Checkout'
+				}
 			},
-			25off : {
-				mark : '?25off',
-				code : 'NEW'.
-				enable : false,
-				copy : 'Save $25 Off Your First Order Of $75+ <strong>Use Code : NEW</strong> at Checkout'
-			},
-			default : {
-				code : '20OFF',
-				enable : true,
-				copy : 'Save 20% On All Orders Through Thanksgiving! <strong>Use Code : 20OFF</strong>'
-			}
-		},
+		default : {
+			code : '20OFF',
+			enable : true,
+			copy : 'Save 20% On All Orders Through Thanksgiving! <strong>Use Code : 20OFF</strong>'
+		}},
 		cookieE : 30,
-		//cookie25 : '?25off',
-		//div_copy : {
-			//'twentyFiveOff' : 'Save $25 Off Your First Order Of $75+ <strong>Use Code : NEW</strong> at Checkout',
-			//'default' : 'Save 20% On All Orders Through Thanksgiving! <strong>Use Code : 20OFF</strong'
-		//},
-		//default_code : '20OFF',
     	urls_to_exclude : ['/checkout/thank_you','/pages/passport','/pages/huledet'],
     	css : '#promo_code_bar{line-height:200%;position:fixed;height:104px!important;width:100%;background-color:#6dc01d;z-index:-1000000000;display:table;}#text_bar{color:white;display:table-cell;vertical-align:middle;text-align:center;font-size:2em;}@media only screen and (max-width: 900px) {#promo_code_bar{line-height:200%;position:fixed;height:0px;width:100%;background-color:#6dc01d;z-index:-1000000;display:table;}#promo_code_bar{bottom:0!important;font-size:80%;padding:5px 5px 5px 5px;height:130px!important;}#text_bar{line-height:125%;}#sidebar, #content{margin-top:0px!important;}#footer{padding-bottom:200px!important;}}@media only screen and (min-width: 901px) {#sidebar, #content{margin-top:104px!important;padding-bottom:104px!important;}}',
 		head : document.head || document.getElementsByTagName('head')[0],
     	style : document.createElement('style')
-
 	},
 
 	//URL Functions
@@ -76,22 +70,20 @@ var profiler = {
     	//console.log('setting cookie now');
 	},
 
+	discountArray : function(){
+		return Object.keys(this.settings.cookieV.discounts);
+	}
+
 	urlTcookie : function(){
-		
-		var cookie = this.readCookie(this.settings.cookieN);
-		if (cookie === true){
-			//console.log('cookie is already set');
-			return;
-		}
 
 		var url = this.urlSearch();
-		var search_for =[]; //search for each discount.  return after first hit.
-			//console.log('index = ' + url.indexOf(this.settings.cookieM) );
-			if ( url.indexOf(this.settings.cookieM) > -1 ) {
-				//console.log('url contains 25off');
-				this.setCookie(this.settings.cookieN, this.settings.cookieV, this.settings.cookieE);
-				this.setCookie('discount','NEW',this.settings.cookieE);
+		var discountMark = this.discountArray();
+		discountMark.forEach(function(search){
+			if (url.indexOf(search) > -1){
+				this.settings.cookieV.discounts[search].enable = true;
+				return;
 			}
+		});
 	},
 
 	//Decision Enginge
@@ -122,20 +114,25 @@ var profiler = {
 	},
 
 	eligible : function(){
-		console.log('activated');
+		//console.log('activated');
 		this.urlTcookie();
-
 		var urlCheck = this.urlCheck();
-		var cookie = this.cookieCheck();
+		var toCheck = this.discountArray();
+		var discount = toCheck.forEach(function(){
+			if (urlCheck && profiler.settings.cookieV.discounts[discount].enable) {
+				profiler.showBar(profiler.settings.cookieV.discounts[discount].copy);
+			} else if (urlCheck){ profiler.showBar(profiler.settings.default.copy)};
+		});
+		//var cookie = this.cookieCheck();
 		//console.log('url = ' + urlCheck + ' : cookie = ' + cookie);
 
-		if ( urlCheck && cookie ) {
-			console.log('div copy = ' + profiler.settings.div_copy.twentyFiveOff);
-			this.showBar(profiler.settings.div_copy.twentyFiveOff);
-		} else if ( urlCheck ) {
-			console.log('div copy = ' + profiler.settings.div_copy.default);
-			this.showBar(profiler.settings.div_copy.default);
-		}
+		//if ( urlCheck && cookie ) {
+		//	console.log('div copy = ' + profiler.settings.div_copy.twentyFiveOff);
+		//	this.showBar(profiler.settings.div_copy.twentyFiveOff);
+		//} else if ( urlCheck ) {
+		//	console.log('div copy = ' + profiler.settings.div_copy.default);
+		//	this.showBar(profiler.settings.div_copy.default);
+		//}
 	},
 
 	//Promo Bar Activation

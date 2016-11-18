@@ -1,0 +1,51 @@
+<html>
+<head>
+<script type="text/javascript">
+var execute = {
+	//Set & Read Cookie
+	setCookie : function(cookieN,cookieV,cookieE){
+   		var d = new Date();
+    	d.setTime(d.getTime() + (cookieE*24*60*60*1000));
+    	var expires = "expires="+ d.toUTCString();
+    	document.cookie = cookieN + "=" + cookieV + ";" + expires + ";path=/";
+    	console.log('setting cookie now');
+	},
+	readCookie : function(cname){
+		var name = cname + "=";
+    	var ca = document.cookie.split(';');
+    	for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) === 0) {
+            return c.substring(name.length,c.length);
+        }
+    	}
+    	return false;
+	},
+	//Export Cookie To Window
+	exportCookie : function(){
+		var cookie = this.readCookie('pc');
+		window.previous_customer = cookie;
+	},
+	//Set Cookie / Export Cookie
+	getURL : function(){
+		return window.location.pathname;
+	},
+	setExport : function(){
+		var url = this.getURL();
+		if (url.indexOf('/thank_you')>-1){
+			console.log('purchased');
+			this.setCookie('pc',true,365);
+		} else {
+			console.log('display');
+			this.exportCookie();
+		}
+		this.exportCookie();	
+	}
+}
+execute.setExport();
+</script>
+</head>
+</html>
