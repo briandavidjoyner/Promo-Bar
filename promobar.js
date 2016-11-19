@@ -1,7 +1,6 @@
 var profiler = {
 
 	settings : {
-<<<<<<< HEAD
 		cookieN :'dc_cookie',
 		cookieV : {
 			oh : {
@@ -29,7 +28,6 @@ var profiler = {
 		div_copy : {
 			'twentyFiveOff' : 'Save $25 On Your First Order Of $50+ <strong>Use Code : NEW</strong> at Checkout',
 			'default' : 'Save 20% On All Orders Through Thanksgiving! <strong>Use Code : 20OFF</strong'
->>>>>>> Update-Flow
 		},
 		copy : {
 			fiftyOff : '',
