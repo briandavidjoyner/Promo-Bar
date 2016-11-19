@@ -6,7 +6,7 @@ var profiler = {
 		cookieE : 1,
 		cookieM : '?25off',
 		div_copy : {
-			'twentyFiveOff' : 'Save $25 Off Your First Order Of $50+ <strong>Use Code : NEW</strong> at Checkout',
+			'twentyFiveOff' : 'Save $25 On Your First Order Of $50+ <strong>Use Code : NEW</strong> at Checkout',
 			'default' : 'Save 20% On All Orders Through Thanksgiving! <strong>Use Code : 20OFF</strong'
 		},
 		default_code : '20OFF',
