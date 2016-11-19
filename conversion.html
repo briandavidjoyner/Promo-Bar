@@ -1,13 +1,14 @@
 <html>
 <head>
 <script type="text/javascript">
-var execute = {
+var dc_cookie = {
 	//Set & Read Cookie
 	setCookie : function(cookieN,cookieV,cookieE){
+   		var toString = JSON.stringify(cookieV);
    		var d = new Date();
     	d.setTime(d.getTime() + (cookieE*24*60*60*1000));
     	var expires = "expires="+ d.toUTCString();
-    	document.cookie = cookieN + "=" + cookieV + ";" + expires + ";path=/";
+    	document.cookie = cookieN + "=" + toString + ";" + expires + ";path=/";
     	console.log('setting cookie now');
 	},
 	readCookie : function(cname){
@@ -19,33 +20,37 @@ var execute = {
             c = c.substring(1);
         }
         if (c.indexOf(name) === 0) {
-            return c.substring(name.length,c.length);
+            var toReturn = c.substring(name.length,c.length);
+            return JSON.parse(toReturn);
         }
     	}
     	return false;
-	},
-	//Export Cookie To Window
-	exportCookie : function(){
-		var cookie = this.readCookie('pc');
-		window.previous_customer = cookie;
 	},
 	//Set Cookie / Export Cookie
 	getURL : function(){
 		return window.location.pathname;
 	},
-	setExport : function(){
-		var url = this.getURL();
-		if (url.indexOf('/thank_you')>-1){
+	//Set Purchase History
+	time : function(){
+		var d = new Date();
+		return d.getTime();
+	},
+	conversion : function(){
+		var root = window.dc_cookie;
+		//if (root.url.indexOf('/thank_you')>-1){
 			console.log('purchased');
-			this.setCookie('pc',true,365);
-		} else {
-			console.log('display');
-			this.exportCookie();
-		}
-		this.exportCookie();	
+			root.cookie.oh.lo = root.time;
+			this.setCookie('dc_cookie',root.cookie,365);
+		//}
+	},
+	init : function(){
+		window.dc_cookie.url = this.getURL();
+		window.dc_cookie.time = this.time();
+		window.dc_cookie.cookie = this.readCookie('dc_cookie');
+		this.conversion();
 	}
 }
-execute.setExport();
+dc_cookie.init();
 </script>
 </head>
 </html>

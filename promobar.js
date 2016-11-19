@@ -191,10 +191,12 @@ var profiler = {
   	user : function(){
   		var object = this.readCookie(dc_cookie);
   		return object;
-  	}
+  	},
+  	//Profiler Initiation
+  	init : 
 
 };
 
-
-profiler.eligible();
-profiler.couponEligible();
+profiler.init();
+//profiler.eligible();
+//profiler.couponEligible();
